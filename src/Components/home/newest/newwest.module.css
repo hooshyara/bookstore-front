@@ -1,6 +1,6 @@
 .box {
-    padding-left: 30px;
-    padding-right: 30px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
 }
 
 .more {
@@ -8,3 +8,16 @@
     color: #d1a8ff;
     font-size: 20px;
 }
+
+.booksSlider {
+    width: 100%;
+    padding: 15px 5px 35px;
+    overflow: hidden;
+  }
+  
+  .bookSlide {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  

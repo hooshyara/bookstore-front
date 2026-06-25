@@ -2,75 +2,33 @@ import React from "react";
 import styles from "./newwest.module.css";
 import BookCard from "./bookCard/bookCard";
 
-interface sectionsProps {
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+
+interface Book {
+  id: number;
   title: string;
+  author: string;
+  price: number;
+  discountPrice?: number;
+  discountPercent?: number;
+  rating: number;
+  ratingCount: number;
+  image: string;
 }
-export default function Newest({ title }: sectionsProps) {
-  const newestBooks = [
-    {
-      id: 1,
-      title: "تاریخ هنر جهان",
-      author: "محمد نقی فرامرزی",
-      price: 283000,
-      discountPrice: 198000,
-      discountPercent: 30,
-      rating: 4.3,
-      ratingCount: 98,
-      image: "src/assets/home/newest/Book5.png",
-    },
-    {
-      id: 2,
-      title: "سه شنبه ها باموری",
-      author: "میج البوم",
-      price: 198000,
-      discountPrice: 120000,
-      discountPercent: 30,
-      rating: 4.8,
-      ratingCount: 150,
-      image: "src/assets/home/newest/Book6.png",
-    },
-    {
-      id: 3,
-      title: "وقتی بدن نه میگوید",
-      author: "گابور میت",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book3.png",
-    },
-    {
-      id: 4,
-      title: "ملت عشق",
-      author: "الیف شافاک",
-      price: 150000,
-      discountPrice: 120000,
-      discountPercent: 30,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book4.png",
-    },
-    {
-      id: 5,
-      title: "وقتی نیچه گریست",
-      author: "اروین د. یالوم",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book.png",
-    },
-    {
-      id: 6,
-      title: "جادوی باور ذهن",
-      author: "دارن هاردی",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book2.png",
-    },
-  ];
+
+interface SectionsProps {
+  title: string;
+  books: Book[];
+}
+
+export default function Newest({ title, books }: SectionsProps) {
+  
 
   return (
-    <section className={`${styles.container} mt-5`}>
+    <section className={`${styles.container} container mt-5`}>
       <div className={`d-flex flex-column ${styles.box}`}>
         <div className="d-flex flex-row align-items-center justify-content-between mb-4">
           <div className="d-flex flex-row align-items-center">
@@ -86,30 +44,54 @@ export default function Newest({ title }: sectionsProps) {
                 d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z"
               />
             </svg>
-            <a className={`d-none d-md-inline  ${styles.more}`} href="#">
+
+            <a className={`d-none d-md-inline ${styles.more}`} href="#">
               مشاهده بیشتر
             </a>
           </div>
+
           <h2 className={styles.sectionTitle}>{title}</h2>
         </div>
 
-        <div
-          className={`d-flex flex-column flex-md-row flex-wrap align-items-center justify-content-md-between gap-4 ${styles.booksWrapper}`}
+        <Swiper
+          modules={[Autoplay]}
+          className={styles.booksSlider}
+          spaceBetween={24}
+          slidesPerView={1}
+          loop={true}
+          speed={700}
+          autoplay={{
+            delay: 1000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+          }}
+          breakpoints={{
+            576: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 4,
+            },
+          }}
         >
-          {newestBooks.map((book) => (
-            <BookCard
-              key={book.id}
-              title={book.title}
-              author={book.author}
-              price={book.price}
-              discountPrice={book.discountPrice}
-              discountPercent={book.discountPercent}
-              rating={book.rating}
-              ratingCount={book.ratingCount}
-              image={book.image}
-            />
+          {books.map((book) => (
+            <SwiperSlide key={book.id} className={styles.bookSlide}>
+              <BookCard
+                title={book.title}
+                author={book.author}
+                price={book.price}
+                discountPrice={book.discountPrice}
+                discountPercent={book.discountPercent}
+                rating={book.rating}
+                ratingCount={book.ratingCount}
+                image={book.image}
+              />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );
