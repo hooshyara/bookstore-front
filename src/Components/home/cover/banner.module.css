@@ -1,0 +1,6 @@
+.bannerImage {
+    width: 80%;
+    object-fit: cover; 
+    object-position: center;
+    display: block;
+}

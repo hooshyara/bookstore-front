@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./header/header";
 import Item from "../../Components/home/item";
 import Newest from "../../Components/home/newest/newest";
-import HaveDiscount from "../../Components/home/haveDiscount/haveDiscount";
 import Banner from "../../Components/home/cover/cover";
 
 
