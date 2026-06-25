@@ -1,74 +1,80 @@
 import React from "react";
-import styles from "./newwest.module.css";
-import BookCard from "./bookCard/bookCard";
+import BookCard from "../newest/bookCard/bookCard";
+import styles from "../newest/newwest.module.css";
 
 interface sectionsProps {
   title: string;
 }
-export default function Newest({ title }: sectionsProps) {
-  const newestBooks = [
+
+export default function HaveDiscount({ title }: sectionsProps) {
+  const haveDiscountBooks = [
     {
       id: 1,
-      title: "تاریخ هنر جهان",
-      author: "محمد نقی فرامرزی",
-      price: 283000,
-      discountPrice: 198000,
+      title: "قهرمان عصر ما",
+      author: "ماریو بارگاس بوسا",
+      price: 85000,
+      discountPrice: 125000,
       discountPercent: 30,
       rating: 4.3,
       ratingCount: 98,
-      image: "src/assets/home/newest/Book5.png",
+      image: "src/assets/home/haveDiscount/Book1.png",
     },
     {
       id: 2,
-      title: "سه شنبه ها باموری",
-      author: "میج البوم",
-      price: 198000,
-      discountPrice: 120000,
+      title: "رویای نیمه شب",
+      author: "مظفر سالاری",
+      price: 85000,
+      discountPrice: 125000,
       discountPercent: 30,
-      rating: 4.8,
-      ratingCount: 150,
-      image: "src/assets/home/newest/Book6.png",
+      rating: 4.3,
+      ratingCount: 98,
+      image: "src/assets/home/haveDiscount/Book3.png",
     },
     {
       id: 3,
-      title: "وقتی بدن نه میگوید",
-      author: "گابور میت",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book3.png",
+      title: "هلن",
+      author: "اروین د. یالوم",
+      price: 85000,
+      discountPrice: 125000,
+      discountPercent: 30,
+      rating: 4.3,
+      ratingCount: 98,
+      image: "src/assets/home/haveDiscount/Book2.png",
     },
     {
       id: 4,
-      title: "ملت عشق",
-      author: "الیف شافاک",
-      price: 150000,
-      discountPrice: 120000,
+      title: "ابر شهر",
+      author: "محمد رودگر",
+      price: 85000,
+      discountPrice: 125000,
       discountPercent: 30,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book4.png",
+      rating: 4.3,
+      ratingCount: 98,
+      image: "src/assets/home/haveDiscount/Book6.png",
     },
     {
       id: 5,
-      title: "وقتی نیچه گریست",
-      author: "اروین د. یالوم",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book.png",
+      title: "دیابت شیرین",
+      author: "فارما کوتراپی",
+      price: 85000,
+      discountPrice: 125000,
+      discountPercent: 30,
+      rating: 4.3,
+      ratingCount: 98,
+      image: "src/assets/home/haveDiscount/Book5.png",
     },
     {
       id: 6,
-      title: "جادوی باور ذهن",
-      author: "دارن هاردی",
-      price: 110000,
-      rating: 4.9,
-      ratingCount: 320,
-      image: "src/assets/home/newest/Book2.png",
+      title: "سردرسته ها",
+      author: "ماریو بارگاس یوسا",
+      price: 85000,
+      discountPrice: 125000,
+      discountPercent: 30,
+      rating: 4.3,
+      ratingCount: 98,
+      image: "src/assets/home/haveDiscount/Book4.png",
     },
   ];
-
   return (
     <section className={`${styles.container} mt-5`}>
       <div className={`d-flex flex-column ${styles.box}`}>
@@ -96,7 +102,7 @@ export default function Newest({ title }: sectionsProps) {
         <div
           className={`d-flex flex-column flex-md-row flex-wrap align-items-center justify-content-md-between gap-4 ${styles.booksWrapper}`}
         >
-          {newestBooks.map((book) => (
+          {haveDiscountBooks.map((book) => (
             <BookCard
               key={book.id}
               title={book.title}

@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./header/header";
 import Item from "../../Components/home/item";
 import Newest from "../../Components/home/newest/newest";
+import HaveDiscount from "../../Components/home/haveDiscount/haveDiscount";
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
           <Item title="رمان خارجی" link="src/assets/home/category/4.jpg" />
           <Item title="روانشناسی" link="src/assets/home/category/5.png" />
         </div>
-        <Newest />
+        <Newest title="جدیدترین کتاب‌ها"/>
+        <HaveDiscount title="تا 30 درصد تخفیف "/>
       </div>
     </>
   );
