@@ -1,0 +1,26 @@
+.sliderContainer {
+    width: 100%;
+    padding: 20px 0 40px 0;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+  
+  .mySwiper {
+    padding: 10px !important;
+  }
+  
+  .mySwiper :global(.swiper-button-next),
+  .mySwiper :global(.swiper-button-prev) {
+    color: #a855f7;
+    transform: scale(0.6);
+  }
+  
+  .mySwiper :global(.swiper-pagination-bullet-active) {
+    background: #a855f7;
+  }
+  
+  .mySwiper :global(.swiper-slide) {
+    height: auto;
+    display: flex;
+  }
+  

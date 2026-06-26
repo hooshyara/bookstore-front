@@ -11,6 +11,9 @@ export default function SliderBanner() {
   const authorBanner = [
     "src/assets/home/sliderBanner/Banner1.png",
     "src/assets/home/sliderBanner/‌Banner2.png",
+    "src/assets/home/sliderBanner/Banner3.png",
+    "src/assets/home/sliderBanner/Banner4.png",
+    "src/assets/home/sliderBanner/Banner5.png",
   ];
 
   return (
