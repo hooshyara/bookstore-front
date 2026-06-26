@@ -3,6 +3,7 @@ import Header from "./header/header";
 import Item from "../../Components/home/item";
 import Newest from "../../Components/home/newest/newest";
 import Banner from "../../Components/home/cover/cover";
+import SliderBanner from "../../Components/home/sliderBanner/sliderBanner";
 
 
 
@@ -466,6 +467,7 @@ export default function Home() {
         <Newest title="پرفروش ترین کتاب های روانشناسی" books={psychologyBooks}/>
         <Banner imageUrl="src/assets/home/banner/Banner3.png"/>
         <Newest title="تا 90 درصد تخفیف " books={BigDiscount}/>
+        <SliderBanner/>
 
 
 
