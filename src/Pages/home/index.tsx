@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header/header";
+import Header from "../../Components/header/header";
 import Item from "../../Components/home/item";
 import Newest from "../../Components/home/newest/newest";
 import Banner from "../../Components/home/cover/cover";
@@ -8,6 +8,7 @@ import MiniDetail from "../../Components/home/miniDetail/miniDetail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./index.module.css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import Footer from "../../Components/footer/Footer";
 
 export default function Home() {
   const newestBooks = [
@@ -549,6 +550,7 @@ export default function Home() {
           </Swiper>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
