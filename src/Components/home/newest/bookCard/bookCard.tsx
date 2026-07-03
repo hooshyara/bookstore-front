@@ -5,8 +5,8 @@ interface BookCardProps {
   title: string;
   author: string;
   price: number;
-  discountPrice?: number;
-  discountPercent?: number;
+  discountPrice?: number | null;
+  discountPercent?: number | null;
   rating: number;
   ratingCount: number;
   image: string;

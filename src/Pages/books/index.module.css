@@ -1,0 +1,11 @@
+.books {
+    width: 80%;
+    direction: rtl;
+}
+
+p.books_title {
+    direction: rtl;
+    box-shadow: 0 16px 32px rgba(29, 29, 29, 0.36);
+    border-radius: 15px;
+
+}
