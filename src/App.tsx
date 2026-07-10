@@ -4,6 +4,7 @@ import Footer from "./Components/footer/Footer";
 import Nav from "./Components/nav";
 import Home from "./Pages/home";
 import Books from "./Pages/books";
+import About from "./Pages/about";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Books />} />
+          <Route path="/about" element={<About />} />
 
           <Route path="*" element={<h1>404 | صفحه پیدا نشد</h1>} />
         </Routes>
