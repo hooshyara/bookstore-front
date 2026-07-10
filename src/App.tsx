@@ -5,6 +5,7 @@ import Nav from "./Components/nav";
 import Home from "./Pages/home";
 import Books from "./Pages/books";
 import About from "./Pages/about";
+import ContactUs from "./Pages/contactus";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Books />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<ContactUs />} />
 
           <Route path="*" element={<h1>404 | صفحه پیدا نشد</h1>} />
         </Routes>
