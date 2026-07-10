@@ -52,6 +52,8 @@ export default function Nav() {
             <li><a href="/books">محصولات</a></li>
             <li><a href="/about">درباره ما</a></li>
             <li><a href="/contact">ارتباط با ما</a></li>
+            <li><a href="/rules">قوانین</a></li>
+            <li><a href="/faq">سوالات متداول</a></li>
           </ul>
         </div>
       </div>
