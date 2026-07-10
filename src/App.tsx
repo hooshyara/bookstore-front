@@ -8,6 +8,7 @@ import About from "./Pages/about";
 import ContactUs from "./Pages/contactus";
 import Rules from "./Pages/rules";
 import FAQ from "./Pages/faq";
+import NotFound from "./Pages/404";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/rules" element={<Rules />} />
           <Route path="/faq" element={<FAQ />} />
 
-          <Route path="*" element={<h1>404 | صفحه پیدا نشد</h1>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </main>
 
