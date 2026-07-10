@@ -7,6 +7,7 @@ import Books from "./Pages/books";
 import About from "./Pages/about";
 import ContactUs from "./Pages/contactus";
 import Rules from "./Pages/rules";
+import FAQ from "./Pages/faq";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/faq" element={<FAQ />} />
 
           <Route path="*" element={<h1>404 | صفحه پیدا نشد</h1>} />
         </Routes>
