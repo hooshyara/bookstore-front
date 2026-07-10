@@ -59,33 +59,7 @@ const FAQ = () => {
       style={{ backgroundColor: "#F7F8FA", minHeight: "100vh" }}
     >
       <div className="container py-5">
-        {/* Breadcrumb */}
-        <div className="row mb-4">
-          <div className="col-12">
-            <nav aria-label="breadcrumb">
-              <ol
-                className="breadcrumb mb-0"
-                style={{ backgroundColor: "transparent" }}
-              >
-                <li className="breadcrumb-item">
-                  <a
-                    href="#"
-                    className="text-decoration-none"
-                    style={{ color: "#744F82" }}
-                  >
-                    خانه
-                  </a>
-                </li>
-                <li
-                  className="breadcrumb-item active text-dark"
-                  aria-current="page"
-                >
-                  سوالات متداول
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </div>
+       
 
         {/* Page Title */}
         <div className="row mb-4">
