@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./index.module.css";
 import BookCard from "../../Components/home/newest/bookCard/bookCard";
+import SideBar from "../../Components/books/sidebar/books-sidebar";
 
 export default function Books() {
   const books = [
@@ -357,32 +357,53 @@ export default function Books() {
     },
   ];
   return (
-    <>
-      <div className="d-flex fl-md-row">
-        <div className="container d-flex flex-column">
-          <div className="w-75 mt-5 ">
-            <p className={`${styles.books_title} fs-2 p-3`}>
-              دسته ی داستان و رمان های خارجی
-            </p>
+    <div
+      className="bg-light"
+      style={{ backgroundColor: "#F7F8FA", minHeight: "100vh" }}
+    >
+      <div className="container py-4">
+        <div className="row g-4">
+          {/* Main Content */}
+          <div className="col-12 col-lg-9 order-2 order-lg-1">
+            <div className="mt-3 mt-lg-0">
+              <div
+                className="p-3 p-md-4 mb-4"
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "16px",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                  border: "1px solid #F0EBF5",
+                }}
+              >
+                <p className="fs-2 fw-bold mb-0" style={{ color: "#2D3748" }}>
+                  دسته ی داستان و رمان های خارجی
+                </p>
+              </div>
+
+              <div className="d-flex flex-wrap gap-3 gap-md-4 justify-content-center">
+                {books.map((book, index) => (
+                  <BookCard
+                    key={index}
+                    title={book.title}
+                    author={book.author}
+                    price={book.price}
+                    discountPercent={book.discountPercent ?? null}
+                    discountPrice={book.discountPrice ?? null}
+                    rating={book.rating}
+                    ratingCount={book.ratingCount}
+                    image={book.image}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className={`${styles.books} w-75 d-flex flex-wrap gap-4 my-4`}>
-            {books.map((book) => {
-              return (
-                <BookCard
-                  title={book.title}
-                  author={book.author}
-                  price={book.price}
-                  discountPercent={book.discountPercent ?? null}
-                  discountPrice={book.discountPrice ?? null}
-                  rating={book.rating}
-                  ratingCount={book.ratingCount}
-                  image={book.image}
-                />
-              );
-            })}
+
+          {/* Sidebar */}
+          <div className="col-12 col-lg-3 order-1 order-lg-2">
+            <SideBar />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
