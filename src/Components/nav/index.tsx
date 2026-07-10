@@ -43,6 +43,19 @@ export default function Nav() {
         </div>
 
       </div>
+      
+      {/* Menu Bar */}
+      <div className={styles.menuBar}>
+        <div className="container">
+          <ul className={styles.menuList}>
+            <li><a href="/">صفحه اصلی</a></li>
+            <li><a href="/books">محصولات</a></li>
+            <li><a href="/about">درباره ما</a></li>
+            <li><a href="/contact">ارتباط با ما</a></li>
+          </ul>
+        </div>
+      </div>
+      
     </nav>
   );
 }

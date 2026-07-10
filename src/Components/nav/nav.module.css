@@ -74,3 +74,61 @@
 .icon {
   display: block;
 }
+/* Menu Bar Styles */
+.menuBar {
+  background-color: #f8f5fa;
+  border-top: 1px solid #e8e0ed;
+  border-bottom: 1px solid #e8e0ed;
+  direction: rtl;
+}
+
+.menuList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+  align-items: center;
+  height: 50px;
+}
+
+.menuList li a {
+  color: #4a3a5c;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.menuList li a:hover {
+  color: #7f699b;
+}
+
+.menuList li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: #7f699b;
+  transition: width 0.3s ease;
+}
+
+.menuList li a:hover::after {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menuList {
+    gap: 1rem;
+    justify-content: space-around;
+  }
+  
+  .menuList li a {
+    font-size: 0.85rem;
+  }
+}
