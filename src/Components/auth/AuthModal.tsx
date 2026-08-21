@@ -1,13 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./AuthModal.module.css";
+import { login, register } from "../../Utils/api";
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLoginSuccess: (token: string) => void; // اضافه کردن callback
 }
 
-export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+export default function AuthModal({
+  isOpen,
+  onClose,
+  onLoginSuccess,
+}: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,8 +41,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      setError("");
+      setLoading(false);
     } else {
       document.body.style.overflow = "unset";
+      setMobile("");
+      setPassword("");
     }
     return () => {
       document.body.style.overflow = "unset";
@@ -40,9 +55,40 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(isLogin ? "ورود" : "ثبت‌نام");
+    setError("");
+    setLoading(true);
+  
+    try {
+      if (isLogin) {
+        const response = await login(mobile, password);
+        const token = response.accessToken?.accessToken || response.token;
+        if (token) {
+          localStorage.setItem("authToken", token);
+          
+          const user = response.data?.user || { 
+            name: response.data?.name || "کاربر",
+            mobile: mobile 
+          };
+          
+          onLoginSuccess(token, user);
+          onClose();
+        } else {
+          throw new Error("کاربر یافت نشد");
+        }
+      } else {
+        const response = await register(mobile, password);
+        setIsLogin(true);
+        setPassword("");
+        setMobile("");
+        setError("ثبت‌نام با موفقیت انجام شد. لطفاً وارد شوید.");
+      }
+    } catch (err: unknown) {
+      setError((err as Error).message || "خطا در ارتباط با سرور");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,13 +101,19 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${isLogin ? styles.activeTab : ""}`}
-            onClick={() => setIsLogin(true)}
+            onClick={() => {
+              setIsLogin(true);
+              setError("");
+            }}
           >
             ورود
           </button>
           <button
             className={`${styles.tab} ${!isLogin ? styles.activeTab : ""}`}
-            onClick={() => setIsLogin(false)}
+            onClick={() => {
+              setIsLogin(false);
+              setError("");
+            }}
           >
             ثبت‌نام
           </button>
@@ -82,12 +134,17 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             )}
 
             <div className={styles.formGroup}>
-              <label htmlFor="email">ایمیل</label>
+              <label htmlFor="mobile">شماره موبایل</label>
               <input
-                type="email"
-                id="email"
-                placeholder="example@gmail.com"
+                type="tel"
+                id="mobile"
+                placeholder="09123456789"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
                 required
+                minLength={11}
+                maxLength={11}
+                disabled={loading}
               />
             </div>
 
@@ -98,9 +155,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 id="password"
                 placeholder="********"
                 required
-                minLength={6}
+                minLength={3}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
               />
             </div>
+
+            {error && <div className={styles.errorMessage}>{error}</div>}
 
             {isLogin && (
               <div className={styles.forgotPassword}>
@@ -108,15 +170,29 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
             )}
 
-            <button type="submit" className={styles.submitBtn}>
-              {isLogin ? "ورود" : "ثبت‌نام"}
+            <button
+              type="submit"
+              className={styles.submitBtn}
+              disabled={loading}
+            >
+              {loading ? (
+                <span className={styles.spinner}>در حال پردازش...</span>
+              ) : isLogin ? (
+                "ورود"
+              ) : (
+                "ثبت‌نام"
+              )}
             </button>
 
             <div className={styles.divider}>
               <span>یا</span>
             </div>
 
-            <button type="button" className={styles.googleBtn}>
+            <button
+              type="button"
+              className={styles.googleBtn}
+              disabled={loading}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
