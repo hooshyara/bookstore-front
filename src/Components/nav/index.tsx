@@ -1,11 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./nav.module.css";
+import AuthModal from "../auth/AuthModal";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+
+  
+
+  const toggleModal = () => {
+    setIsAuthModalOpen(!isAuthModalOpen);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,7 +23,6 @@ export default function Nav() {
     setIsMenuOpen(false);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -35,7 +42,6 @@ export default function Nav() {
     };
   }, [isMenuOpen]);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -51,7 +57,7 @@ export default function Nav() {
     <nav className={styles.navContainer}>
       <div className="container d-flex align-items-center justify-content-between py-3">
         <div className="d-flex align-items-center gap-3">
-          <button className={`${styles.authBtn} d-none d-md-flex`}>
+          <button className={`${styles.authBtn} d-none d-md-flex`} onClick={toggleModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1.2em"
@@ -88,6 +94,7 @@ export default function Nav() {
             type="text"
             placeholder="جستجوی کتاب، نویسنده، ناشر..."
             className={styles.searchInput}
+            
           />
           <svg
             className={styles.searchIcon}
@@ -220,6 +227,11 @@ export default function Nav() {
 
       {/* Overlay backdrop */}
       {isMenuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
+
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </nav>
   );
 }
