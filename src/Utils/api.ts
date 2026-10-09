@@ -24,6 +24,34 @@ export const login = async (mobile: string, password: string) => {
   }
 };
 
+export interface Book {
+  id: string | number;
+  title: string;
+  author?: string;
+  price?: number;
+  discount?: number;
+  image?: string;
+  cover?: string;
+  description?: string;
+}
+
+export const fetchBooks = async (page = 1, limit = 20): Promise<Book[]> => {
+  const response = await api.get("/books", { params: { page, limit } });
+  const data = response.data;
+  return Array.isArray(data) ? data : data?.items || data?.books || [];
+};
+
+export const fetchBook = async (id: string): Promise<Book> => {
+  const response = await api.get(`/books/${encodeURIComponent(id)}`);
+  return response.data;
+};
+
+export const searchBooks = async (query: string): Promise<Book[]> => {
+  const response = await api.post("/books/search", { query });
+  const data = response.data;
+  return Array.isArray(data) ? data : data?.items || data?.books || [];
+};
+
 export const register = async (mobile: string, password: string) => {
   try {
     const response = await api.post("/auth", {

@@ -6,7 +6,7 @@ import { login, register } from "../../Utils/api";
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (token: string) => void; // اضافه کردن callback
+  onLoginSuccess: (token: string, user?: { name?: string; mobile?: string }) => void;
 }
 
 export default function AuthModal({
