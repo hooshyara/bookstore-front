@@ -9,6 +9,7 @@ const api = axios.create({
   },
 });
 
+// -----------------------Auth API-----------------------
 export const login = async (mobile: string, password: string) => {
   try {
     const response = await api.post("/auth/login", {
@@ -24,6 +25,22 @@ export const login = async (mobile: string, password: string) => {
   }
 };
 
+export const register = async (mobile: string, password: string) => {
+  try {
+    const response = await api.post("/auth", {
+      mobile,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Register error:", error.response?.data || error.message);
+    }
+    throw error;
+  }
+};
+
+// -----------------------Book API-----------------------
 export interface Book {
   id: string | number;
   title: string;
@@ -52,16 +69,14 @@ export const searchBooks = async (query: string): Promise<Book[]> => {
   return Array.isArray(data) ? data : data?.items || data?.books || [];
 };
 
-export const register = async (mobile: string, password: string) => {
+// -----------------------Contact API-----------------------
+export const sendContactMessage = async (name: string, mobile: string, description: string) => {
   try {
-    const response = await api.post("/auth", {
-      mobile,
-      password,
-    });
+    const response = await api.post("/contactus", { name, mobile, description });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Register error:", error.response?.data || error.message);
+      console.error("Contact error:", error.response?.data || error.message);
     }
     throw error;
   }

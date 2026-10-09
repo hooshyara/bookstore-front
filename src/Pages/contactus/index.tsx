@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { sendContactMessage } from "../../Utils/api";
 
 const ContactUs: React.FC = () => {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async () => {
+    await sendContactMessage(name, mobile, description);
+
+    toast.success("پیام شما با موفقیت ارسال شد");
+    setName("");
+    setMobile("");
+    setDescription("");
+  };
   return (
     <div
       dir="rtl"
@@ -10,7 +24,6 @@ const ContactUs: React.FC = () => {
       <div className="container py-5">
         {/* Breadcrumb */}
         
-
         {/* Page Title */}
         <div className="row mb-5">
           <div className="col-12 text-center">
@@ -41,6 +54,8 @@ const ContactUs: React.FC = () => {
                         className="form-control"
                         placeholder="علی لایق"
                         style={{ borderRadius: "8px" }}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
                     <div className="col-12 col-md-6">
@@ -49,6 +64,8 @@ const ContactUs: React.FC = () => {
                         className="form-control"
                         placeholder="0930 000 000"
                         style={{ borderRadius: "8px" }}
+                        value={mobile}
+                        onChange={(e) => setMobile(e.target.value)}
                       />
                     </div>
                   </div>
@@ -59,6 +76,8 @@ const ContactUs: React.FC = () => {
                       rows={5}
                       placeholder="سلام ، من توی پرداخت مشکل دارم لطفا راهنماییم کنید :("
                       style={{ borderRadius: "8px", resize: "none" }}
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
 
@@ -76,6 +95,7 @@ const ContactUs: React.FC = () => {
                         borderRadius: "8px",
                         border: "none",
                       }}
+                      onClick={handleSubmit}
                     >
                       ارسال پیام
                     </button>
