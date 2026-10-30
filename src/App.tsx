@@ -10,6 +10,7 @@ import Rules from "./Pages/rules";
 import FAQ from "./Pages/faq";
 import NotFound from "./Pages/404";
 import BookPage from "./Pages/books/BookPage";
+import CartPage from "./Pages/cart/CartPage";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="/rules" element={<Rules />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/books/:id" element={<BookPage />} />
-
+          <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </main>

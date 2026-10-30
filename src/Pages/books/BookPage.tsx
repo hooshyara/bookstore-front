@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../Components/books/sidebar/books-sidebar";
 import { fetchBook, type Book, buildImageUrl } from "../../Utils/api";
+import { addToCart } from "../../Utils/api";
 import styles from "./bookPage.module.css";
+import axios from "axios";
 
 const toNumber = (v: number | string | null | undefined): number | null => {
   if (v == null || v === "") return null;
@@ -12,9 +14,12 @@ const toNumber = (v: number | string | null | undefined): number | null => {
 
 export default function BookPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [adding, setAdding] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -46,6 +51,24 @@ export default function BookPage() {
     discountPrice != null && price != null && discountPrice < price;
   const finalPrice = hasDiscount ? discountPrice : price;
   const image = buildImageUrl(book?.imageUrl);
+
+  const handleAddToCart = async () => {
+    if (!book) return;
+    try {
+      setAdding(true);
+      await addToCart({ bookId: Number(book.id), quantity: 1 });
+      navigate("/cart");
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e) && e.response?.status === 401) {
+        alert("لطفاً ابتدا وارد حساب خود شوید");
+        navigate("/login");
+      } else {
+        alert("خطا در افزودن به سبد خرید");
+      }
+    } finally {
+      setAdding(false);
+    }
+  };
 
   return (
     <div style={{ backgroundColor: "#F7F8FA", minHeight: "100vh" }}>
@@ -149,9 +172,10 @@ export default function BookPage() {
                       <div className={styles.actions}>
                         <button
                           className={styles.buyBtn}
-                          disabled={!book.isValid}
+                          onClick={handleAddToCart}
+                          disabled={!book.isValid || adding}
                         >
-                          افزودن به سبد خرید
+                          {adding ? "در حال افزودن..." : "افزودن به سبد خرید"}
                         </button>
                         <button
                           className={styles.iconBtn}

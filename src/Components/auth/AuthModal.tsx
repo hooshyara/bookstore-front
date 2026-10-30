@@ -66,6 +66,8 @@ export default function AuthModal({
         const token = response.accessToken?.accessToken || response.token;
         if (token) {
           localStorage.setItem("authToken", token);
+          localStorage.setItem("userId", response.accessToken?.userInfo?.userId?.toString() || "");
+
           
           const user = response.data?.user || { 
             name: response.data?.name || "کاربر",

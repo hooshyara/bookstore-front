@@ -1,0 +1,246 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #2d3748;
+  margin: 0;
+}
+
+.clearBtn {
+  background: transparent;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.clearBtn:hover:not(:disabled) {
+  background: #fee2e2;
+}
+.clearBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.empty {
+  background: #fff;
+  border: 1px solid #f0ebf5;
+  border-radius: 16px;
+  padding: 60px 24px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.emptyIcon {
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+.emptyText {
+  color: #718096;
+  font-size: 16px;
+  margin: 0 0 20px;
+}
+.shopBtn {
+  display: inline-block;
+  background: #4f46e5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.15s ease;
+}
+.shopBtn:hover {
+  background: #4338ca;
+  color: #fff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemCard {
+  background: #fff;
+  border: 1px solid #f0ebf5;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+}
+
+.itemImageLink {
+  flex-shrink: 0;
+  width: 80px;
+  height: 106px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f7f8fa;
+  border: 1px solid #f0ebf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.itemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.itemImagePlaceholder {
+  color: #a0aec0;
+  font-size: 20px;
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
+  color: #2d3748;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.itemTitle:hover {
+  color: #4f46e5;
+}
+
+.itemAuthor {
+  color: #718096;
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.itemMeta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.qty {
+  color: #718096;
+  font-size: 13px;
+}
+.unitPrice {
+  color: #4a5568;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itemActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-right: auto;
+}
+
+.itemPrice {
+  color: #2d3748;
+  font-weight: 800;
+  font-size: 16px;
+}
+.itemPriceCurrency {
+  font-size: 12px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.removeBtn {
+  background: transparent;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.removeBtn:hover:not(:disabled) {
+  background: #fee2e2;
+}
+.removeBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.summary {
+  background: #fff;
+  border: 1px solid #f0ebf5;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 20px;
+}
+
+.summaryTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2d3748;
+  margin: 0 0 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  color: #4a5568;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: #f0ebf5;
+  margin: 12px 0;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  color: #2d3748;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 8px 0 16px;
+}
+
+.checkoutBtn {
+  width: 100%;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.checkoutBtn:hover:not(:disabled) {
+  background: #4338ca;
+}
+.checkoutBtn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
