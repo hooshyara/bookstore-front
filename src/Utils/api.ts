@@ -57,6 +57,39 @@ export interface Book {
   ratingCount?: number | string | null;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface Book {
+  id: string | number;
+  title: string;
+  author?: string;
+  price?: number | string;
+  public_year?: number;
+  description?: string;
+  imageUrl?: string | null;
+  isValid?: boolean;
+  genre?: Genre | undefined | null;
+  genre_id?: number;
+  rating?: number | string | null;
+  ratingCount?: number | string | null;
+  discount?: number | string | null;
+  discountPrice?: number | string | null;
+  discountPercent?: number | string | null;
+}
+
+const API_BASE =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL) ||
+  "http://127.0.0.1:3000";
+
+export const buildImageUrl = (raw?: string | null): string | undefined => {
+  if (!raw) return undefined;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `${API_BASE}/${raw.replace(/^\/+/, "")}`;
+};
+
 export const fetchBooks = async (page = 1, limit = 200): Promise<Book[]> => {
   const response = await api.get("/books", { params: { page, limit } });
   const data = response.data;
@@ -71,9 +104,10 @@ export const fetchBooks = async (page = 1, limit = 200): Promise<Book[]> => {
   return [];
 };
 
-export const fetchBook = async (id: string): Promise<Book> => {
-  const response = await api.get(`/books/${encodeURIComponent(id)}`);
-  return response.data;
+export const fetchBook = async (id: string | number): Promise<Book> => {
+  const response = await api.get(`/books/${encodeURIComponent(String(id))}`);
+  const payload = response.data;
+  return (payload?.data ?? payload) as Book;
 };
 
 export const searchBooks = async (query: string): Promise<Book[]> => {

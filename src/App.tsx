@@ -9,6 +9,7 @@ import ContactUs from "./Pages/contactus";
 import Rules from "./Pages/rules";
 import FAQ from "./Pages/faq";
 import NotFound from "./Pages/404";
+import BookPage from "./Pages/books/BookPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/books/:id" element={<BookPage />} />
 
           <Route path="*" element={<NotFound/>} />
         </Routes>
