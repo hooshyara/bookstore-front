@@ -45,17 +45,30 @@ export interface Book {
   id: string | number;
   title: string;
   author?: string;
-  price?: number;
-  discount?: number;
-  image?: string;
-  cover?: string;
+  price?: number | string;
+  imageUrl?: string | null;
   description?: string;
+  public_year?: number;
+  genre?: unknown;
+  discount?: number | string | null;
+  discountPrice?: number | string | null;
+  discountPercent?: number | string | null;
+  rating?: number | string | null;
+  ratingCount?: number | string | null;
 }
 
-export const fetchBooks = async (page = 1, limit = 20): Promise<Book[]> => {
+export const fetchBooks = async (page = 1, limit = 200): Promise<Book[]> => {
   const response = await api.get("/books", { params: { page, limit } });
   const data = response.data;
-  return Array.isArray(data) ? data : data?.items || data?.books || [];
+
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.data)) return data.data;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.books)) return data.books;
+  if (Array.isArray(data?.data?.items)) return data.data.items;
+
+  console.warn("Unexpected /books response shape:", data);
+  return [];
 };
 
 export const fetchBook = async (id: string): Promise<Book> => {
