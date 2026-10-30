@@ -1,23 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import BookCard from "../../Components/home/newest/bookCard/bookCard";
 import SideBar from "../../Components/books/sidebar/books-sidebar";
 import { fetchBooks, type Book } from "../../Utils/api";
 
-const mapBookToCard = (book: Book) => {
-  const b = book as Book;
+const API_BASE = "http://127.0.0.1:3000";
 
-  return {
-    id: b.id,
-    title: b.title,
-    author: b.author,
-    price: b.price,
-    discountPercent: b.discountPercent ?? b.discount ?? null,
-    discountPrice: b.discountPrice ?? null,
-    rating: b.rating ?? null,
-    ratingCount: b.ratingCount ?? null,
-    image: b.imageUrl ?? undefined,
-  };
+const buildImageUrl = (raw?: string | null): string | undefined => {
+  if (!raw) return undefined;
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return `${API_BASE}/${raw.replace(/^\/+/, "")}`;
 };
+
+const mapBookToCard = (book: Book) => ({
+  id: book.id,
+  title: book.title,
+  author: book.author,
+  price: book.price,
+  discountPercent: (book as any).discountPercent ?? (book as any).discount ?? null,
+  discountPrice: (book as any).discountPrice ?? null,
+  rating: (book as any).rating ?? null,
+  ratingCount: (book as any).ratingCount ?? null,
+  image: buildImageUrl(book.imageUrl),
+});
 
 export default function Books() {
   const [books, setBooks] = useState<Book[]>([]);
